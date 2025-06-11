@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Skills Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --dark: #2d3436;
+            --light: #dfe6e9;
+            --success: #00b894;
+            --warning: #fdcb6e;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: var(--light);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(108, 92, 231, 0.3);
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) translateX(1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 5rem 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Home Section */
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+
+        .profile-content {
+            flex: 1;
+            animation: fadeIn 1s ease;
+        }
+
+        .profile-img {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: floatImage 4s ease-in-out infinite;
+        }
+
+        .profile-img div {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 50px rgba(108, 92, 231, 0.5);
+        }
+
+        .profile-img div::before {
+            content: "Your Photo";
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .details {
+            margin: 1.5rem 0;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin: 0.8rem 0;
+            font-size: 1.2rem;
+        }
+
+        .detail-item i {
+            width: 30px;
+            color: var(--accent);
+            margin-right: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(253, 121, 168, 0.6);
+        }
+
+        /* Table of Contents */
+        #toc {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+        }
+
+        #toc h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .toc-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .toc-item:hover {
+            transform: translateY(-10px);
+            background: rgba(108, 92, 231, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .toc-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .toc-item p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Lecture Sections */
+        .lecture {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .lecture-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .lecture-title {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .attendance {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .attended {
+            background: var(--success);
+        }
+
+        .not-attended {
+            background: var(--warning);
+            color: var(--dark);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .learned, .notes {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+        }
+
+        .subtopic {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .subtopic h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .image-placeholder {
+            height: 150px;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatImage {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            #home {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .detail-item {
+                justify-content: center;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Professional Skills</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#toc">Contents</a>
+            <a href="#lectures">Lectures</a>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="profile-content">
+            <h1>S.W.G.L.E. KUMARATHUNGA</h1>
+            <div class="details">
+                <div class="detail-item">
+                    <i class="fas fa-user"></i>
+                    <span>Age: 20 Years</span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>From: Kandy, Sri Lanka</span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-id-card"></i>
+                    <span>SA Number: SA23514140</span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Currently: 2nd Year, 2nd Semester</span>
+                </div>
+            </div>
+            <a href="#toc" class="btn">View Portfolio</a>
+        </div>
+        <div class="profile-img">
+            <div></div>
+        </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section id="toc">
+        <h2>Table of Contents</h2>
+        <div class="toc-grid">
+            <div class="toc-item" onclick="scrollToLecture('lecture1')">
+                <h3>1. Introduction to Professional Skills</h3>
+                <p>Group dynamics, decision-making, conflict resolution</p>
+            </div>
+            <div class="toc-item" onclick="scrollToLecture('lecture2')">
+                <h3>2. Portfolio Management</h3>
+                <p>Career portfolios, organization, assessment</p>
+            </div>
+            <div class="toc-item" onclick="scrollToLecture('lecture3')">
+                <h3>3. Report & Proposal Writing</h3>
+                <p>Project proposals, external & internal proposals</p>
+            </div>
+            <div class="toc-item" onclick="scrollToLecture('lecture4')">
+                <h3>4. CV and Cover Letter Writing</h3>
+                <p>Resume building, professional applications</p>
+            </div>
+            <div class="toc-item" onclick="scrollToLecture('lecture5')">
+                <h3>5. Interview Skills</h3>
+                <p>Verbal/non-verbal communication, interview preparation</p>
+            </div>
+            <div class="toc-item" onclick="scrollToLecture('lecture6')">
+                <h3>6. Food Fiesta</h3>
+                <p>Marketing, customer relations, business experience</p>
+            </div>
+            <div class="toc-item" onclick="scrollToLecture('lecture7')">
+                <h3>7. Speaking Skills</h3>
+                <p>Meeting types, planning, effective contribution</p>
+            </div>
+            <div class="toc-item" onclick="scrollToLecture('lecture8')">
+                <h3>8. Email Writing</h3>
+                <p>Formal email etiquette, job applications</p>
+            </div>
+            <div class="toc-item" onclick="scrollToLecture('lecture9')">
+                <h3>9. Telephone Etiquette</h3>
+                <p>Professional phone communication, customer service</p>
+            </div>
+            <div class="toc-item" onclick="scrollToLecture('lecture10')">
+                <h3>10. Emotional Intelligence</h3>
+                <p>Self-awareness, empathy, emotional regulation</p>
+            </div>
+            <div class="toc-item" onclick="scrollToLecture('lecture11')">
+                <h3>11. Dining Etiquette</h3>
+                <p>Table manners, social conduct, professional behavior</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lectures Section -->
+    <section id="lectures">
+        <!-- Lecture 1 -->
+        <div class="lecture" id="lecture1">
+            <div class="lecture-header">
+                <h2 class="lecture-title">1. Introduction to Professional Skills</h2>
+                <span class="attendance attended">Attended</span>
+            </div>
+            <div class="content-grid">
+                <div class="learned">
+                    <h3>What I Learned</h3>
+                    <p>In this case study we divided into small groups and I was with my friends. I got the decision-making topic. I learned how to respect others' decisions, and how to deal with group members. I improved my conflict resolution, and how to make better decisions. So this is a better experience for me to face real-world workplace challenges. Then I can make myself more effective and versatile.</p>
+                </div>
+                <div class="notes">
+                    <h3>Short Notes</h3>
+                    <p>Key aspects of professional skills development through group activities and decision-making exercises.</p>
+                    
+                    <div class="subtopic">
+                        <h3>Worksheets</h3>
+                        <div class="image-grid">
+                            <div class="image-placeholder">Worksheet 1</div>
+                            <div class="image-placeholder">Worksheet 2</div>
+                            <div class="image-placeholder">Worksheet 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lecture 2 -->
+        <div class="lecture" id="lecture2">
+            <div class="lecture-header">
+                <h2 class="lecture-title">2. Portfolio Management</h2>
+                <span class="attendance attended">Attended</span>
+            </div>
+            <div class="content-grid">
+                <div class="learned">
+                    <h3>What I Learned</h3>
+                    <p>In this module, I learned how portfolios are used in professional and career growth. I gained knowledge of the different types of portfolios I can develop. And I learned an important type of portfolio. That is a career portfolio and I learned more things about career portfolios. And I learned how to organize the portfolio and what is assessment portfolios. This knowledge helps me to show my achievements and qualifications clearly.</p>
+                </div>
+                <div class="notes">
+                    <h3>Short Notes</h3>
+                    <p><strong>What will a portfolio say about yourself:</strong><br>
+                    ➢ A presentation of yourself<br>
+                    ➢ Organizing yourself<br>
+                    ➢ Finding about yourself</p>
+                    
+                    <p><strong>Different types of portfolios:</strong><br>
+                    • Personal portfolio<br>
+                    • Career/Dossier portfolio<br>
+                    • Employment portfolio<br>
+                    • Assessment portfolio</p>
+                    
+                    <p><strong>Two Types of career Portfolios:</strong><br>
+                    • Master portfolios<br>
+                    • Targeted portfolios</p>
+                    
+                    <p><strong>Organizing the portfolio:</strong><br>
+                    • Cover page<br>
+                    • Table of Contents<br>
+                    • Division</p>
+                    
+                    <p><strong>What is an Assessment Portfolio:</strong><br>
+                    A document to evaluate performance of students</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lecture 3 -->
+        <div class="lecture" id="lecture3">
+            <div class="lecture-header">
+                <h2 class="lecture-title">3. Report Writing & Project Proposal Writing</h2>
+                <span class="attendance attended">Attended</span>
+            </div>
+            <div class="content-grid">
+                <div class="learned">
+                    <h3>What I Learned</h3>
+                    <p>In this lecture, I learn about the key parts and goals of the project proposals. So a project is a big task that needs careful planning, a lot of time, and effort. I learned two main types of proposals: External Proposals and Internal Proposals.</p>
+                    
+                    <p><strong>External Proposals</strong> mean proposals which seek to secure contracts by offering concise summaries, management specifics, and financial outlines.</p>
+                    
+                    <p><strong>Internal Proposals</strong> mean proposals which seek to secure contracts by offering concise summaries, management specifics, and financial outlines.</p>
+                    
+                    <p>Introduction should include: Purpose, Credibility, Definition of problem, Background of problem, Significance of problem, Solution, Preview of parts or sections of proposal.</p>
+                </div>
+                <div class="notes">
+                    <h3>Short Notes</h3>
+                    <p><strong>Project Proposal Essentials:</strong><br>
+                    • Clear problem definition<br>
+                    • Proposed solution<br>
+                    • Resource requirements<br>
+                    • Timeline<br>
+                    • Budget details</p>
+                    
+                    <p><strong>Key Sections:</strong><br>
+                    1. Executive Summary<br>
+                    2. Problem Statement<br>
+                    3. Proposed Solution<br>
+                    4. Methodology<br>
+                    5. Budget<br>
+                    6. Timeline<br>
+                    7. Conclusion</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lecture 4 -->
+        <div class="lecture" id="lecture4">
+            <div class="lecture-header">
+                <h2 class="lecture-title">4. CV and Cover Letter Writing</h2>
+                <span class="attendance attended">Attended</span>
+            </div>
+            <div class="content-grid">
+                <div class="learned">
+                    <h3>What I Learned</h3>
+                    <p>In this module, our lecturer taught us about CVs and cover letters. We learned what should be included in the CV, how to make a great CV and the importance of the CV. And also I learned how to write a cover letter. We got some examples of CVs and cover letters.</p>
+                </div>
+                <div class="notes">
+                    <h3>Short Notes</h3>
+                    <p><strong>CV Essentials:</strong><br>
+                    • Contact Information<br>
+                    • Professional Summary<br>
+                    • Work Experience<br>
+                    • Education<br>
+                    • Skills<br>
+                    • Achievements</p>
+                    
+                    <p><strong>Cover Letter Tips:</strong><br>
+                    • Address specific person<br>
+                    • Mention position applying for<br>
+                    • Highlight relevant experience<br>
+                    • Show enthusiasm<br>
+                    • Professional closing</p>
+                    
+                    <div class="subtopic">
+                        <h3>My CV and Cover Letter</h3>
+                        <div class="image-grid">
+                            <div class="image-placeholder">My CV</div>
+                            <div class="image-placeholder">Cover Letter</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lecture 5 -->
+        <div class="lecture" id="lecture5">
+            <div class="lecture-header">
+                <h2 class="lecture-title">5. Interview Skills and Formal Letter Writing</h2>
+                <span class="attendance attended">Attended</span>
+            </div>
+            <div class="content-grid">
+                <div class="learned">
+                    <h3>What I Learned</h3>
+                    <p>In this lecture, I learned about job interviews. I learned to appraise the role of effective verbal and non-verbal communication in job interviews and use a range of verbal and nonverbal communication strategies to face a job interview successfully. I learned how to describe my strengths, education, work experience, and future goals and learned about interview outfits.</p>
+                </div>
+                <div class="notes">
+                    <h3>Short Notes</h3>
+                    <p>"Job interviews are scary, even when you've prepared thoroughly. But when you are prepared, you can harness the adrenaline to work for you so that you put your best foot forward and get the job you want." (Locker & Kaczmarek, 2007: 499. Business Communication: Building Critical Skills. Boston: McGraw Hill)</p>
+                    
+                    <div class="subtopic">
+                        <h3>Interview Outfits for Men</h3>
+                        <div class="image-grid">
+                            <div class="image-placeholder">Formal Attire 1</div>
+                            <div class="image-placeholder">Formal Attire 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lecture 6 -->
+        <div class="lecture" id="lecture6">
+            <div class="lecture-header">
+                <h2 class="lecture-title">6. Food Fiesta</h2>
+                <span class="attendance attended">Attended</span>
+            </div>
+            <div class="content-grid">
+                <div class="learned">
+                    <h3>What I Learned</h3>
+                    <p>We organized a food festival on 2025/03/25 at SLIIT CITY UNI ground premises. We had a lot of fun and gained knowledge in marketing (how we deal with customers, how to respect buyers, and how to do a genuine business.) We choose cutlets, sandwiches, mocktails, and cool milo. As Miss Ishara guided us, We made a profit after selling food at the food festival.</p>
+                </div>
+                <div class="notes">
+                    <h3>Short Notes</h3>
+                    <p>Key learning points from organizing a food festival event and managing a small business operation.</p>
+                    
+                    <div class="subtopic">
+                        <h3>Food Fiesta Photos</h3>
+                        <div class="image-grid">
+                            <div class="image-placeholder">Food Stall</div>
+                            <div class="image-placeholder">Our Team</div>
+                            <div class="image-placeholder">Customers</div>
+                            <div class="image-placeholder">Products</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lecture 7 -->
+        <div class="lecture" id="lecture7">
+            <div class="lecture-header">
+                <h2 class="lecture-title">7. Speaking Skills</h2>
+                <span class="attendance not-attended">Not Attended</span>
+            </div>
+            <div class="content-grid">
+                <div class="learned">
+                    <h3>What I Learned</h3>
+                    <p>In this lesson, I learned about meetings. I learned the different types of meetings and how to plan a meeting. I learned how to prepare before a meeting and what questions to ask, like the purpose, place, and who will attend. I also learned the roles in a meeting like secretary and facilitator. I learned how to contribute in a meeting and how to face problems that can happen. This lesson helped me understand how to be confident and active in meetings.</p>
+                </div>
+                <div class="notes">
+                    <h3>Short Notes</h3>
+                    <p><strong>What is a meeting?</strong><br>
+                    A meeting is a planned discussion where people talk about important topics, make decisions, and work together to solve problems or plan for the future.</p>
+                    
+                    <p><strong>Types of meetings:</strong><br>
+                    • Chat (informal discussion)<br>
+                    • Brainstorming among colleagues<br>
+                    • Project meeting/team meeting<br>
+                    • Department/departmental meeting<br>
+                    • Meeting with suppliers<br>
+                    • Meeting with a customer<br>
+                    • Board general meeting/AGM<br>
+                    • EGM (extraordinarly general meeting)</p>
+                    
+                    <div class="subtopic">
+                        <h3>Meeting Planning</h3>
+                        <div class="image-grid">
+                            <div class="image-placeholder">Planning Template</div>
+                        </div>
+                    </div>
+                    
+                    <div class="subtopic">
+                        <h3>Contributing Effectively</h3>
+                        <div class="image-grid">
+                            <div class="image-placeholder">Guidelines</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lecture 8 -->
+        <div class="lecture" id="lecture8">
+            <div class="lecture-header">
+                <h2 class="lecture-title">8. Email Writing</h2>
+                <span class="attendance attended">Attended</span>
+            </div>
+            <div class="content-grid">
+                <div class="learned">
+                    <h3>What I Learned</h3>
+                    <p>In this lesson, I learned about email etiquette. I learned how to write a formal email for a job application. I learned that I should use a proper greeting and a good subject line. I should not use short forms or capital letters. I also learned how to end the email in a polite way and write my full name. This lesson helped me understand how to write a good email when applying for a job.</p>
+                </div>
+                <div class="notes">
+                    <h3>Short Notes</h3>
+                    <p><strong>Sample Job Interview Email:</strong></p>
+                    <div class="image-grid">
+                        <div class="image-placeholder">Email Example</div>
+                    </div>
+                    
+                    <p><strong>Greetings:</strong><br>
+                    • Dear [Name],<br>
+                    • Hello [Name],<br>
+                    • Good morning/afternoon</p>
+                    
+                    <p><strong>Closings:</strong><br>
+                    • Best regards,<br>
+                    • Kind regards,<br>
+                    • Regards,<br>
+                    • Sincerely,</p>
+                    
+                    <div class="subtopic">
+                        <h3>Email Template</h3>
+                        <div class="image-grid">
+                            <div class="image-placeholder">Template</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lecture 9 -->
+        <div class="lecture" id="lecture9">
+            <div class="lecture-header">
+                <h2 class="lecture-title">9. Telephone Etiquette</h2>
+                <span class="attendance attended">Attended</span>
+            </div>
+            <div class="content-grid">
+                <div class="learned">
+                    <h3>What I Learned</h3>
+                    <p>In this lecture, I learned about telephone etiquette and customer service. I learned how to answer the phone politely and introduce myself and my department. I learned to speak clearly and smile while talking. I also learned that I should return calls quickly and help the caller instead of just forwarding the call. I learned how to deal with angry callers in a calm and respectful way. This training helped me understand how to talk on the phone in a professional and helpful manner.</p>
+                </div>
+                <div class="notes">
+                    <h3>Short Notes</h3>
+                    <p><strong>Telephone Etiquette and Customer Service – Key Points</strong><br>
+                    • Answer Quickly – Pick up the phone within 3 rings.<br>
+                    • Identify Yourself – Say your name and department.<br>
+                    • Speak Politely – Use kind words and a friendly tone.<br>
+                    • Listen Carefully – Show interest and take notes.<br>
+                    • Take Messages Properly – Get names, numbers, and details clearly.<br>
+                    • Return Calls Fast – Call back within one working day.<br>
+                    • Handle Transfers Well – Tell the caller where you're sending them.<br>
+                    • Don't Use Slang – Speak clearly and professionally.<br>
+                    • Ask Before Holding – Always ask before putting someone on hold.<br>
+                    • Help Angry Callers – Stay calm, listen, and be respectful.<br>
+                    • Go the Extra Mile – Do more than expected to help.<br>
+                    • Use People's Names – It makes communication friendlier.<br>
+                    • Always Say Goodbye – End the call politely and clearly.</p>
+                    
+                    <div class="subtopic">
+                        <h3>Reference Material</h3>
+                        <div class="image-grid">
+                            <div class="image-placeholder">Etiquette Guide</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lecture 10 -->
+        <div class="lecture" id="lecture10">
+            <div class="lecture-header">
+                <h2 class="lecture-title">10. Emotional Intelligence</h2>
+                <span class="attendance not-attended">Not Attended</span>
+            </div>
+            <div class="content-grid">
+                <div class="learned">
+                    <h3>What I Learned</h3>
+                    <p>I got a lot of knowledge on emotional intelligence from this lecture. Emotional intelligence is the capacity to identify our own emotions as well as those of others. We can refer to a variety of actions, thoughts, and feelings as emotions. Additionally, I learned about the significance of emotional intelligence (EI) for both professional and personal growth, as well as the effects it has on relationships, leadership, and productivity. The key subtopics I took away from this talk were self-awareness, self-regulation, mindfulness, cognitive reappraisal, and empathy. We also learned about IQ from the talk. This lecture is crucial because we need to always be able to control our emotions and comprehend how others are experiencing.</p>
+                </div>
+                <div class="notes">
+                    <h3>Short Notes</h3>
+                    <p><strong>Components of Emotional Intelligence:</strong><br>
+                    1. Self-awareness<br>
+                    2. Self-regulation<br>
+                    3. Motivation<br>
+                    4. Empathy<br>
+                    5. Social skills</p>
+                    
+                    <p><strong>Benefits:</strong><br>
+                    • Better teamwork<br>
+                    • Improved leadership<br>
+                    • Enhanced decision-making<br>
+                    • Stronger relationships<br>
+                    • Effective conflict resolution</p>
+                    
+                    <div class="subtopic">
+                        <h3>Reference Material</h3>
+                        <div class="image-grid">
+                            <div class="image-placeholder">EI Concepts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lecture 11 -->
+        <div class="lecture" id="lecture11">
+            <div class="lecture-header">
+                <h2 class="lecture-title">11. Dining Etiquette</h2>
+                <span class="attendance attended">Attended</span>
+            </div>
+            <div class="content-grid">
+                <div class="learned">
+                    <h3>What I Learned</h3>
+                    <p>I learned an understanding of the various facets of etiquette and the need of proper conduct in both social and professional contexts from this presentation. We studied table etiquette, including how to handle bread, use cutlery, utilize napkins, and properly season food with salt and pepper. I was able to learn more about social etiquette from this lecture, including what it is, why it matters, and what it is. I acquired social etiquette from this presentation, including listening, making eye contact, smiling authentically, and maintaining personal grooming.</p>
+                </div>
+                <div class="notes">
+                    <h3>Short Notes</h3>
+                    <p><strong>Key Table Etiquette Rules:</strong><br>
+                    • Napkin on lap when seated<br>
+                    • Start eating when host begins<br>
+                    • Pass food to the right<br>
+                    • Use utensils from outside in<br>
+                    • Elbows off the table<br>
+                    • Chew with mouth closed<br>
+                    • Thank host before leaving</p>
+                    
+                    <div class="subtopic">
+                        <h3>Reference Material</h3>
+                        <div class="image-grid">
+                            <div class="image-placeholder">Place Setting</div>
+                            <div class="image-placeholder">Table Manners</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Create animated particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size
+                const size = Math.random() * 30 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                // Random color variation
+                const hue = 260 + Math.random() * 20;
+                particle.style.background = `hsla(${hue}, 70%, 60%, ${Math.random() * 0.4})`;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Scroll to lecture function
+        function scrollToLecture(id) {
+            const element = document.getElementById(id);
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            
+            // Add smooth scrolling for all links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
